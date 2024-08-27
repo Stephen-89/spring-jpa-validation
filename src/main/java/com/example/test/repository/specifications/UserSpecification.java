@@ -19,6 +19,7 @@ import com.example.test.model.User;
 
 public class UserSpecification {
 
+	private static final String USERNAME = "username";
 	private static final String FIRST_NAME = "firstName";
 	private static final String LAST_NAME = "lastName";
 
@@ -38,7 +39,7 @@ public class UserSpecification {
 	public static Specification<User> findByFirstNameAndLastName(UserFilter userFilter) {
         return (root, query, criteriaBuilder) -> {
         	List<Predicate> predicates = new ArrayList<>();
-        	query.orderBy(criteriaBuilder.desc(root.get("username")));
+        	query.orderBy(criteriaBuilder.desc(root.get(USERNAME)));
             if(StringUtils.isNotEmpty(userFilter.getFirstName())) {
             	predicates.add(criteriaBuilder.equal(root.get(FIRST_NAME), userFilter.getFirstName()));
             }
@@ -53,7 +54,7 @@ public class UserSpecification {
         return (root, query, criteriaBuilder) -> {
         	Join<User, Role> rolesJoin = root.join("roles");
         	List<Predicate> predicates = new ArrayList<>();
-        	query.orderBy(criteriaBuilder.asc(root.get("username")));
+        	query.orderBy(criteriaBuilder.asc(root.get(USERNAME)));
             if(StringUtils.isNotEmpty(userFilter.getFirstName())) {
             	predicates.add(criteriaBuilder.equal(root.get(FIRST_NAME), userFilter.getFirstName()));
             }

@@ -33,7 +33,16 @@ public class User {
 	private String password;
 	private String firstName;
 	private String lastName;
-    
+	private int age;
+	
+	public User(Long id, String username, String firstName, String lastName, int age) {
+		this.id = id;
+		this.username = username;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+	}
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private List<Role> roles;
